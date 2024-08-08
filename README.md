@@ -24,7 +24,7 @@ Before using this registration page, ensure that your server has the following P
 5. Direct users to the registration page to start creating accounts.
 
 ## Credits
-- **Project Creator**: [Your Name](https://github.com/ferreira9006)
+- **Project Creator**: [Gabriel Ferreira](https://github.com/ferreira9006)
 - **AzerothCore**: [AzerothCore Community](https://github.com/azerothcore)
 
 ## Contributors
