@@ -1,2 +1,2 @@
-# file-manager
-A simple, yet effective file manager.
+# AzerothCore registration page
+AC register page.
