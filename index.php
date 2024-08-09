@@ -48,7 +48,7 @@
                 </div>
               </div>
 
-              <p class="mb-0"><small id="passwordCharsHelper" class="form-text">Minimum 8 characters, maximum 15 characters.</small></p>
+              <p class="mb-0"><small id="passwordCharsHelper" class="form-text">Minimum 8 characters, maximum 15 characters. No special characters allowed.</small></p>
               <p class="mb-0"><small id="mustContainHelper" class="form-text">At least one uppercase letter.</small></p>
               <p><small id="passwordMatchHelper" class="form-text">Your passwords must match.</small></p>
 
