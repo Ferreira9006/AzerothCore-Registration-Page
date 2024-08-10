@@ -1,0 +1,12 @@
+body {
+  background-image: url("../images/01.avif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.custom-card {
+  max-width: 50rem;
+  margin: 0 auto;
+  border-radius: 10px !important;
+}
