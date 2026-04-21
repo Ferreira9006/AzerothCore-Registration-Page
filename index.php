@@ -1,4 +1,19 @@
-<?php require 'config.php'; ?>
+<?php
+require 'config.php';
+try {
+  // Checks if the DB info is correct / accessible.
+  $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+  // Redirect to db_error.php with error details and blank the page
+  $query = http_build_query([
+    'error_message' => $e->getMessage(),
+    'error_code' => $e->getCode()
+  ]);
+  header('Location: app/errors/db_error.php?' . $query);
+  exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
