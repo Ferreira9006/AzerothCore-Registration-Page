@@ -1,8 +1,8 @@
 <?php
 // Database Constants
 $host = "127.0.0.1"; // Database Host
-$user = "root"; // Database Username
-$pass = "ascent"; // Database Password
+$user = "acore"; // Database Username
+$pass = "acore"; // Database Password
 $db = "acore_auth"; // Database Name
 
 // Website Constants
