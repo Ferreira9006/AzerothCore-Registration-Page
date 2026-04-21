@@ -39,22 +39,22 @@ try {
                 <div class="form-group row mb-3">
                   <label for="username" class="col-sm-3 col-form-label">Username</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="username" name="username" maxlength="15" required>
-                    <small id="usernameHelper"></small>
+                    <input type="text" class="form-control" id="username" name="username" maxlength="17" required>
+                    <small id="usernameHelper">Maximum 17 characters.</small>
                   </div>
                 </div>
                 <div class="form-group row mb-3">
                   <label for="email" class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                    <input type="email" class="form-control" id="email" name="email" required>
-                    <small id="emailHelper"></small>
+                    <input type="email" class="form-control" id="email" name="email" maxlength="255" required>
+                    <small id="emailHelper">Maximum 255 characters.</small>
                   </div>
                 </div>
 
                 <div class="form-group row mb-3">
                   <label for="password" class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password" maxlength="16" required>
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@ try {
                   </div>
                 </div>
 
-                <p class="mb-0"><small id="passwordCharsHelper" class="form-text">Minimum 8 characters, maximum 15 characters. No special characters allowed.</small></p>
+                <p class="mb-0"><small id="passwordCharsHelper" class="form-text">Minimum 8 characters, maximum 16 characters. No special characters allowed.</small></p>
                 <p class="mb-0"><small id="mustContainHelper" class="form-text">At least one uppercase letter.</small></p>
                 <p><small id="passwordMatchHelper" class="form-text">Your passwords must match.</small></p>
 

@@ -1,7 +1,7 @@
 // Requirements
 let validEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Email regex
-let validPassword = /^[a-zA-Z0-9]{8,15}$/; // Password regex
-let validUsername = /^[a-zA-Z0-9]{8,15}$/; // Username regex
+let validPassword = /^[a-zA-Z0-9]{8,16}$/; // Password regex
+let validUsername = /^[a-zA-Z0-9]{8,17}$/; // Username regex
 let mustContain = /[A-Z]/; // Must contain uppercase letter
 
 // Get the helper elements
@@ -41,7 +41,7 @@ function validateForm() {
   if (usernameTouched) {
     if (!isUsernameValid) {
       usernameHelper.classList.add("text-danger");
-      usernameHelper.innerHTML = "Username must be between 8 and 15 characters. Only letters and numbers are allowed!";
+      usernameHelper.innerHTML = "Username must be between 8 and 17 characters. Only letters and numbers are allowed!";
     } else {
       usernameHelper.classList.remove("text-danger");
       usernameHelper.innerHTML = "";
@@ -53,6 +53,9 @@ function validateForm() {
     if (!isEmailValid) {
       emailHelper.classList.add("text-danger");
       emailHelper.innerHTML = "Please enter a valid email address!";
+    } else if (inputEmail.value.length > 255) {
+      emailHelper.classList.add("text-danger");
+      emailHelper.innerHTML = "Email must be at most 255 characters.";
     } else {
       emailHelper.classList.remove("text-danger");
       emailHelper.innerHTML = "";
