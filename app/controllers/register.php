@@ -7,12 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $passwordRepeat = filter_var($_POST['passwordRepeat']);
 
     // Validate min/max lengths
-    if (strlen($username) < 1 || strlen($username) > 17) {
-      echo "<div class='alert alert-danger' role='alert'>Username must be between 1 and 17 characters.</div>";
+    if (strlen($username) < USERNAME_MIN_LENGTH || strlen($username) > USERNAME_MAX_LENGTH) {
+      echo "<div class='alert alert-danger' role='alert'>Username must be between ".USERNAME_MIN_LENGTH." and ".USERNAME_MAX_LENGTH." characters.</div>";
       return;
     }
-    if (strlen($password) < 1 || strlen($password) > 16) {
-      echo "<div class='alert alert-danger' role='alert'>Password must be between 1 and 16 characters.</div>";
+    if (strlen($password) < PASSWORD_MIN_LENGTH || strlen($password) > PASSWORD_MAX_LENGTH) {
+      echo "<div class='alert alert-danger' role='alert'>Password must be between ".PASSWORD_MIN_LENGTH." and ".PASSWORD_MAX_LENGTH." characters.</div>";
       return;
     }
     if (strlen($email) > 255) {

@@ -39,7 +39,7 @@ try {
                 <div class="form-group row mb-3">
                   <label for="username" class="col-sm-3 col-form-label">Username</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="username" name="username" maxlength="17" minlength="1" required>
+                    <input type="text" class="form-control" id="username" name="username" maxlength="<?= USERNAME_MAX_LENGTH ?>" minlength="<?= USERNAME_MIN_LENGTH ?>" required>
                   </div>
                 </div>
                 <div class="form-group row mb-3">
@@ -52,7 +52,7 @@ try {
                 <div class="form-group row mb-3">
                   <label for="password" class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                    <input type="password" class="form-control" id="password" name="password" maxlength="16" minlength="1" required>
+                    <input type="password" class="form-control" id="password" name="password" maxlength="<?= PASSWORD_MAX_LENGTH ?>" minlength="<?= PASSWORD_MIN_LENGTH ?>" required>
                   </div>
                 </div>
 
@@ -65,9 +65,9 @@ try {
 
                 <div class="alert alert-info mt-3" role="alert">
                   <ul class="mb-0">
-                    <li>Username: 1-17 characters, only letters and numbers.</li>
+                    <li>Username: <?= USERNAME_MIN_LENGTH ?>-<?= USERNAME_MAX_LENGTH ?> characters, only letters and numbers.</li>
                     <li>Email: up to 255 characters, must be valid format.</li>
-                    <li>Password: 1-16 characters, only letters and numbers.</li>
+                    <li>Password: <?= PASSWORD_MIN_LENGTH ?>-<?= PASSWORD_MAX_LENGTH ?> characters, only letters and numbers.</li>
                     <li>Password must contain at least one uppercase letter.</li>
                     <li>Passwords must match.</li>
                   </ul>
@@ -87,6 +87,12 @@ try {
         </div>
       </div>
     </div>
+    <script>
+      const USERNAME_MIN_LENGTH = <?= USERNAME_MIN_LENGTH ?>;
+      const USERNAME_MAX_LENGTH = <?= USERNAME_MAX_LENGTH ?>;
+      const PASSWORD_MIN_LENGTH = <?= PASSWORD_MIN_LENGTH ?>;
+      const PASSWORD_MAX_LENGTH = <?= PASSWORD_MAX_LENGTH ?>;
+    </script>
     <script src="assets/js/script.js"></script>
   </body>
 </html>

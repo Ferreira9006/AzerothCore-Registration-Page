@@ -1,7 +1,7 @@
 // Requirements
 let validEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Email regex
-let validPassword = /^[a-zA-Z0-9]{1,16}$/; // Password regex
-let validUsername = /^[a-zA-Z0-9]{1,17}$/; // Username regex
+let validPassword = new RegExp(`^[a-zA-Z0-9]{${PASSWORD_MIN_LENGTH},${PASSWORD_MAX_LENGTH}}$`); // Password regex
+let validUsername = new RegExp(`^[a-zA-Z0-9]{${USERNAME_MIN_LENGTH},${USERNAME_MAX_LENGTH}}$`); // Username regex
 let mustContain = /[A-Z]/; // Must contain uppercase letter
 
 // Get the helper elements
@@ -41,7 +41,7 @@ function validateForm() {
   if (usernameTouched) {
     if (!isUsernameValid) {
       usernameHelper.classList.add("text-danger");
-      usernameHelper.innerHTML = "Username must be between 1 and 17 characters. Only letters and numbers are allowed!";
+      usernameHelper.innerHTML = `Username must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters. Only letters and numbers are allowed!`;
     } else {
       usernameHelper.classList.remove("text-danger");
       usernameHelper.innerHTML = "";
@@ -67,11 +67,11 @@ function validateForm() {
     if (!isPasswordLengthValid) {
       passwordCharsHelper.classList.add("text-danger");
       passwordCharsHelper.classList.remove("text-success");
-      passwordCharsHelper.innerHTML = "Password must be between 1 and 16 characters. Only letters and numbers allowed.";
+      passwordCharsHelper.innerHTML = `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters. Only letters and numbers allowed.`;
     } else {
       passwordCharsHelper.classList.remove("text-danger");
       passwordCharsHelper.classList.add("text-success");
-      passwordCharsHelper.innerHTML = "Password: Minimum 1 character, maximum 16 characters. Only letters and numbers allowed.";
+      passwordCharsHelper.innerHTML = `Password: Minimum ${PASSWORD_MIN_LENGTH} character(s), maximum ${PASSWORD_MAX_LENGTH} characters. Only letters and numbers allowed.`;
     }
 
     // Must contain uppercase letter validation
