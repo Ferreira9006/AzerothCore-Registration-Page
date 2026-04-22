@@ -39,7 +39,7 @@ try {
                 <div class="form-group row mb-3">
                   <label for="username" class="col-sm-3 col-form-label">Username</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="username" name="username" maxlength="17" required>
+                    <input type="text" class="form-control" id="username" name="username" maxlength="17" minlength="1" required>
                   </div>
                 </div>
                 <div class="form-group row mb-3">
@@ -52,7 +52,7 @@ try {
                 <div class="form-group row mb-3">
                   <label for="password" class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                    <input type="password" class="form-control" id="password" name="password" maxlength="16" required>
+                    <input type="password" class="form-control" id="password" name="password" maxlength="16" minlength="1" required>
                   </div>
                 </div>
 
@@ -65,9 +65,9 @@ try {
 
                 <div class="alert alert-info mt-3" role="alert">
                   <ul class="mb-0">
-                    <li>Username: 8-17 characters, only letters and numbers.</li>
+                    <li>Username: 1-17 characters, only letters and numbers.</li>
                     <li>Email: up to 255 characters, must be valid format.</li>
-                    <li>Password: 8-16 characters, only letters and numbers.</li>
+                    <li>Password: 1-16 characters, only letters and numbers.</li>
                     <li>Password must contain at least one uppercase letter.</li>
                     <li>Passwords must match.</li>
                   </ul>

@@ -6,18 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = filter_var($_POST['password']);
     $passwordRepeat = filter_var($_POST['passwordRepeat']);
 
-    // Validate max lengths
-    if (strlen($username) > 17) {
-        echo "<div class='alert alert-danger' role='alert'>Username must be at most 17 characters.</div>";
-        return;
+    // Validate min/max lengths
+    if (strlen($username) < 1 || strlen($username) > 17) {
+      echo "<div class='alert alert-danger' role='alert'>Username must be between 1 and 17 characters.</div>";
+      return;
     }
-    if (strlen($password) > 16) {
-        echo "<div class='alert alert-danger' role='alert'>Password must be at most 16 characters.</div>";
-        return;
+    if (strlen($password) < 1 || strlen($password) > 16) {
+      echo "<div class='alert alert-danger' role='alert'>Password must be between 1 and 16 characters.</div>";
+      return;
     }
     if (strlen($email) > 255) {
-        echo "<div class='alert alert-danger' role='alert'>Email must be at most 255 characters.</div>";
-        return;
+      echo "<div class='alert alert-danger' role='alert'>Email must be at most 255 characters.</div>";
+      return;
     }
 
     // Get the salt and verifier
