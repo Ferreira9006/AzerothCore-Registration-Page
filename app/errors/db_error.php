@@ -3,25 +3,30 @@ $message = $_GET['error_message'];
 $code = $_GET['error_code'];
 ?>
 
+<?php require_once __DIR__ . '/../../config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Database error</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   </head>
   <body>
     <div class="container">
       <div class="row vh-100 align-items-center justify-content-center">
         <div class="col-12">
           <div class="card shadow border-white px-5 py-4 custom-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h1 class="mb-0">Database Error</h1>
+              <button id="themeToggle" type="button" class="btn btn-outline-secondary btn-sm">Toggle Theme</button>
+            </div>
             <div class="card-body">
-              <h1>Error code: <?= $code ?></h1>
+              <h2>Error code: <?= $code ?></h2>
               <p>Error message: <?= $message ?></p>
               <hr class="mb-5">   
-              <a href="./index">Go back.</a>
+              <a href="../../index.php" id="backBtn" class="btn">Go back</a>
             </div>
             <small class="text-center">
               Made with 
@@ -34,5 +39,28 @@ $code = $_GET['error_code'];
         </div>
       </div>
     </div>
+    <script>
+      const DEFAULT_THEME = "<?= strtolower(DEFAULT_THEME) ?>";
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark-mode');
+          document.body.classList.remove('light-mode');
+        } else {
+          document.body.classList.add('light-mode');
+          document.body.classList.remove('dark-mode');
+        }
+        localStorage.setItem('theme', theme);
+      }
+      function getTheme() {
+        return localStorage.getItem('theme') || DEFAULT_THEME;
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        setTheme(getTheme());
+        document.getElementById('themeToggle').addEventListener('click', function() {
+          const current = getTheme();
+          setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+      });
+    </script>
   </body>
 </html>
