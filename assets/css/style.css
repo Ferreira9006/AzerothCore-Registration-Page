@@ -32,10 +32,95 @@ body.light-mode {
   background: transparent;
 }
 body.light-mode .custom-card {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.92);
   color: #212529;
 }
 body.dark-mode .custom-card {
-  background: rgba(10,34,51,0.85);
+  background: rgba(10,34,51,0.96);
   color: #f8f9fa;
+}
+
+/* Toggle Theme button contrast */
+#themeToggle {
+  background: #212529;
+  color: #fff;
+  border: none;
+  transition: background 0.2s, color 0.2s;
+}
+body.light-mode #themeToggle {
+  background: #f8f9fa;
+  color: #212529;
+  border: 1px solid #212529;
+}
+body.dark-mode #themeToggle {
+  background: #212529;
+  color: #fff;
+  border: 1px solid #fff;
+}
+#themeToggle:hover, #themeToggle:focus {
+  filter: brightness(1.1);
+  outline: 2px solid #888;
+}
+
+/* Link color for dark mode */
+body.dark-mode a, body.dark-mode a:visited {
+  color: #4dc3ff;
+}
+body.light-mode a, body.light-mode a:visited {
+  color: #0a2233;
+}
+
+/* Register button color for both themes */
+body.dark-mode #submit {
+  background: #4dc3ff;
+  color: #0a2233;
+  border: none;
+}
+body.light-mode #submit {
+  background: #0a2233;
+  color: #fff;
+  border: none;
+}
+#submit:disabled {
+  opacity: 0.6;
+}
+
+/* Alert box background for dark mode */
+body.dark-mode .alert-info {
+  background: rgba(77,195,255,0.15);
+  color: #b8e6ff;
+  border-color: #4dc3ff;
+}
+body.light-mode .alert-info {
+  background: #e9f7fe;
+  color: #0a2233;
+  border-color: #b8e6ff;
+}
+
+/* Input backgrounds for dark mode */
+body.dark-mode .form-control {
+  background: #18344a;
+  color: #fff;
+  border: 1px solid #4dc3ff;
+}
+body.dark-mode .form-control:focus {
+  background: #204060;
+  color: #fff;
+  border-color: #4dc3ff;
+}
+body.light-mode .form-control {
+  background: #fff;
+  color: #212529;
+  border: 1px solid #0a2233;
+}
+body.light-mode .form-control:focus {
+  background: #f0f8ff;
+  color: #212529;
+  border-color: #0a2233;
+}
+
+/* Remove white from mb-0 ul in alert */
+body.dark-mode .alert-info ul.mb-0 {
+  background: transparent;
+  color: #b8e6ff;
 }
