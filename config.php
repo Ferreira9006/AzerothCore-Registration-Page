@@ -7,11 +7,13 @@ $pass = "acore"; // Database Password
 $db = "acore_auth"; // Database Name
 
 // Username and Password min/max length constants, default values are client limit.
-define('EMAIL_ENABLED', true); // true = use email, false = do not use email at all
 define('USERNAME_MIN_LENGTH', 1);
 define('USERNAME_MAX_LENGTH', 17);
 define('PASSWORD_MIN_LENGTH', 1);
 define('PASSWORD_MAX_LENGTH', 16);
+
+// true = enable e-mail usage | false = disable e-mail usage.
+define('EMAIL_ENABLED', true);
 
 // Website Constants
 $title = "AzerothCore | Registration Page"; // Website Title
