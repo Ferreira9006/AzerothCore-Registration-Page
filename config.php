@@ -1,4 +1,5 @@
 
+
 <?php
 // Database Constants
 $host = "127.0.0.1"; // Database Host
@@ -14,6 +15,9 @@ define('PASSWORD_MAX_LENGTH', 16);
 
 // true = enable e-mail usage | false = disable e-mail usage.
 define('EMAIL_ENABLED', true);
+
+// Theme: 'dark' or 'light'
+define('DEFAULT_THEME', 'dark');
 
 // Website Constants
 $title = "AzerothCore | Registration Page"; // Website Title

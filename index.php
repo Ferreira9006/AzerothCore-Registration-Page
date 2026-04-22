@@ -30,7 +30,10 @@ try {
         <div class="col-12">
           <div class="card shadow border-white px-5 py-4 custom-card">
             <div class="card-body">
-              <h1><?= $slogan ?></h1>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h1 class="mb-0"><?= $slogan ?></h1>
+                <button id="themeToggle" type="button" class="btn btn-outline-secondary btn-sm">Toggle Theme</button>
+              </div>
               <p><?= $description ?></p>
               <hr class="mb-5">
 
@@ -102,5 +105,29 @@ try {
       const EMAIL_ENABLED = <?= EMAIL_ENABLED ? 'true' : 'false' ?>;
     </script>
     <script src="assets/js/script.js"></script>
+    <script>
+      // Theme logic
+      const DEFAULT_THEME = "<?= strtolower(DEFAULT_THEME) ?>";
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark-mode');
+          document.body.classList.remove('light-mode');
+        } else {
+          document.body.classList.add('light-mode');
+          document.body.classList.remove('dark-mode');
+        }
+        localStorage.setItem('theme', theme);
+      }
+      function getTheme() {
+        return localStorage.getItem('theme') || DEFAULT_THEME;
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        setTheme(getTheme());
+        document.getElementById('themeToggle').addEventListener('click', function() {
+          const current = getTheme();
+          setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+      });
+    </script>
   </body>
 </html>

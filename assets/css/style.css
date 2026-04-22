@@ -1,12 +1,41 @@
-body {
+html, body {
+  height: 100%;
+  min-height: 100vh;
+  background-color: #0a2233;
+}
+html, body {
+  height: 100%;
+  min-height: 100vh;
+}
+body.dark-mode {
+  background-color: #0a2233;
+  color: #f8f9fa;
   background-image: url("../images/01.avif");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
+  background-attachment: fixed;
 }
-
+body.light-mode {
+  background-color: #f8f9fa;
+  color: #212529;
+  background-image: url("../images/01.avif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-attachment: fixed;
+}
 .custom-card {
   max-width: 50rem;
   margin: 0 auto;
   border-radius: 10px !important;
+  background: transparent;
+}
+body.light-mode .custom-card {
+  background: rgba(255,255,255,0.85);
+  color: #212529;
+}
+body.dark-mode .custom-card {
+  background: rgba(10,34,51,0.85);
+  color: #f8f9fa;
 }
