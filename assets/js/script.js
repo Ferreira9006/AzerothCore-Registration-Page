@@ -4,7 +4,7 @@ const PASSWORD_VALID_CHARS = /[a-zA-Z0-9!#$%&'()*+,\-./:;<=>?@[\]^_`{{}}~]/;
 const PASSWORD_VALID_REGEX = new RegExp(`^[a-zA-Z0-9!#$%&'()*+,\-./:;<=>?@[\\]^_\`{{}}~]{${PASSWORD_MIN_LENGTH},${PASSWORD_MAX_LENGTH}}$`);
 let validPassword = PASSWORD_VALID_REGEX; // Password regex
 let validUsername = new RegExp(`^[a-zA-Z0-9]{${USERNAME_MIN_LENGTH},${USERNAME_MAX_LENGTH}}$`); // Username regex
-let mustContain = /[A-Z]/; // Must contain uppercase letter
+// Uppercase letter requirement removed
 
 // Get the helper elements
 let usernameHelper = document.getElementById("usernameHelper"); // Username helper
@@ -36,7 +36,6 @@ function validateForm() {
   let isUsernameValid = validUsername.test(username);
   let isEmailValid = EMAIL_ENABLED ? validEmail.test(email) : true;
   let isPasswordLengthValid = validPassword.test(password);
-  let isPasswordUppercaseValid = mustContain.test(password);
   let isPasswordMatchValid = password === confirmPassword;
 
   // Validate username
@@ -76,14 +75,6 @@ function validateForm() {
       passwordCharsHelper.innerHTML = `Password: Minimum ${PASSWORD_MIN_LENGTH} character(s), maximum ${PASSWORD_MAX_LENGTH} characters. Allowed: a-z, A-Z, 0-9, and ! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ ] ^ _ \` {{ }} ~`;
     }
 
-    // Must contain uppercase letter validation
-    if (isPasswordUppercaseValid) {
-      mustContainHelper.classList.remove("text-danger");
-      mustContainHelper.classList.add("text-success");
-    } else {
-      mustContainHelper.classList.add("text-danger");
-      mustContainHelper.classList.remove("text-success");
-    }
   }
 
   // Confirm password match validation
@@ -98,7 +89,7 @@ function validateForm() {
   }
 
   // Enable or disable the submit button
-  submitButton.disabled = !(isUsernameValid && isEmailValid && isPasswordLengthValid && isPasswordUppercaseValid && isPasswordMatchValid);
+  submitButton.disabled = !(isUsernameValid && isEmailValid && isPasswordLengthValid && isPasswordMatchValid);
 }
 
 // Validate username
