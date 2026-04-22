@@ -42,12 +42,14 @@ try {
                     <input type="text" class="form-control" id="username" name="username" maxlength="<?= USERNAME_MAX_LENGTH ?>" minlength="<?= USERNAME_MIN_LENGTH ?>" required>
                   </div>
                 </div>
+                <?php if (EMAIL_ENABLED): ?>
                 <div class="form-group row mb-3">
                   <label for="email" class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
                     <input type="email" class="form-control" id="email" name="email" maxlength="255" required>
                   </div>
                 </div>
+                <?php endif; ?>
 
                 <div class="form-group row mb-3">
                   <label for="password" class="col-sm-3 col-form-label">Password</label>
@@ -66,7 +68,9 @@ try {
                 <div class="alert alert-info mt-3" role="alert">
                   <ul class="mb-0">
                     <li>Username: <?= USERNAME_MIN_LENGTH ?>-<?= USERNAME_MAX_LENGTH ?> characters.</li>
+                    <?php if (EMAIL_ENABLED): ?>
                     <li>Email: up to 255 characters, must be valid format.</li>
+                    <?php endif; ?>
                     <li>Password: <?= PASSWORD_MIN_LENGTH ?>-<?= PASSWORD_MAX_LENGTH ?> characters.</li>
                     <li>Passwords must match.</li>
                   </ul>
@@ -91,6 +95,7 @@ try {
       const USERNAME_MAX_LENGTH = <?= USERNAME_MAX_LENGTH ?>;
       const PASSWORD_MIN_LENGTH = <?= PASSWORD_MIN_LENGTH ?>;
       const PASSWORD_MAX_LENGTH = <?= PASSWORD_MAX_LENGTH ?>;
+      const EMAIL_ENABLED = <?= EMAIL_ENABLED ? 'true' : 'false' ?>;
     </script>
     <script src="assets/js/script.js"></script>
   </body>

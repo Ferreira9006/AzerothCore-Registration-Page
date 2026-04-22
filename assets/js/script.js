@@ -15,7 +15,7 @@ let passwordMatchHelper = document.getElementById("passwordMatchHelper"); // Con
 
 // Get the input elements
 let inputUsername = document.getElementById('username');
-let inputEmail = document.getElementById('email');
+let inputEmail = EMAIL_ENABLED ? document.getElementById('email') : null;
 let inputPassword = document.getElementById('password');
 let inputConfirmPassword = document.getElementById('passwordRepeat');
 let submitButton = document.getElementById('submit'); // Submit button
@@ -29,12 +29,12 @@ let confirmPasswordTouched = false;
 // Function to validate the form
 function validateForm() {
   let username = inputUsername.value;
-  let email = inputEmail.value;
+  let email = inputEmail ? inputEmail.value : "";
   let password = inputPassword.value;
   let confirmPassword = inputConfirmPassword.value;
 
   let isUsernameValid = validUsername.test(username);
-  let isEmailValid = validEmail.test(email);
+  let isEmailValid = EMAIL_ENABLED ? validEmail.test(email) : true;
   let isPasswordLengthValid = validPassword.test(password);
   let isPasswordUppercaseValid = mustContain.test(password);
   let isPasswordMatchValid = password === confirmPassword;
@@ -51,7 +51,7 @@ function validateForm() {
   }
 
   // Validate email
-  if (emailTouched) {
+  if (EMAIL_ENABLED && emailTouched) {
     if (!isEmailValid) {
       emailHelper.classList.add("text-danger");
       emailHelper.innerHTML = "Please enter a valid email address!";

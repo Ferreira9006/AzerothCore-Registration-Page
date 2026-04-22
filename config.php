@@ -7,6 +7,7 @@ $pass = "acore"; // Database Password
 $db = "acore_auth"; // Database Name
 
 // Username and Password min/max length constants, default values are client limit.
+define('EMAIL_ENABLED', true); // true = use email, false = do not use email at all
 define('USERNAME_MIN_LENGTH', 1);
 define('USERNAME_MAX_LENGTH', 17);
 define('PASSWORD_MIN_LENGTH', 1);
