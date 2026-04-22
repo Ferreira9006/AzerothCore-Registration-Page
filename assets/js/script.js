@@ -1,6 +1,8 @@
 // Requirements
 let validEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Email regex
-let validPassword = new RegExp(`^[a-zA-Z0-9]{${PASSWORD_MIN_LENGTH},${PASSWORD_MAX_LENGTH}}$`); // Password regex
+const PASSWORD_VALID_CHARS = /[a-zA-Z0-9!#$%&'()*+,\-./:;<=>?@[\]^_`{{}}~]/;
+const PASSWORD_VALID_REGEX = new RegExp(`^[a-zA-Z0-9!#$%&'()*+,\-./:;<=>?@[\\]^_\`{{}}~]{${PASSWORD_MIN_LENGTH},${PASSWORD_MAX_LENGTH}}$`);
+let validPassword = PASSWORD_VALID_REGEX; // Password regex
 let validUsername = new RegExp(`^[a-zA-Z0-9]{${USERNAME_MIN_LENGTH},${USERNAME_MAX_LENGTH}}$`); // Username regex
 let mustContain = /[A-Z]/; // Must contain uppercase letter
 
@@ -67,11 +69,11 @@ function validateForm() {
     if (!isPasswordLengthValid) {
       passwordCharsHelper.classList.add("text-danger");
       passwordCharsHelper.classList.remove("text-success");
-      passwordCharsHelper.innerHTML = `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters. Only letters and numbers allowed.`;
+      passwordCharsHelper.innerHTML = `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters. Allowed: a-z, A-Z, 0-9, and ! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ ] ^ _ \` {{ }} ~`;
     } else {
       passwordCharsHelper.classList.remove("text-danger");
       passwordCharsHelper.classList.add("text-success");
-      passwordCharsHelper.innerHTML = `Password: Minimum ${PASSWORD_MIN_LENGTH} character(s), maximum ${PASSWORD_MAX_LENGTH} characters. Only letters and numbers allowed.`;
+      passwordCharsHelper.innerHTML = `Password: Minimum ${PASSWORD_MIN_LENGTH} character(s), maximum ${PASSWORD_MAX_LENGTH} characters. Allowed: a-z, A-Z, 0-9, and ! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ ] ^ _ \` {{ }} ~`;
     }
 
     // Must contain uppercase letter validation

@@ -65,10 +65,9 @@ try {
 
                 <div class="alert alert-info mt-3" role="alert">
                   <ul class="mb-0">
-                    <li>Username: <?= USERNAME_MIN_LENGTH ?>-<?= USERNAME_MAX_LENGTH ?> characters, only letters and numbers.</li>
+                    <li>Username: <?= USERNAME_MIN_LENGTH ?>-<?= USERNAME_MAX_LENGTH ?> characters.</li>
                     <li>Email: up to 255 characters, must be valid format.</li>
-                    <li>Password: <?= PASSWORD_MIN_LENGTH ?>-<?= PASSWORD_MAX_LENGTH ?> characters, only letters and numbers.</li>
-                    <li>Password must contain at least one uppercase letter.</li>
+                    <li>Password: <?= PASSWORD_MIN_LENGTH ?>-<?= PASSWORD_MAX_LENGTH ?> characters.</li>
                     <li>Passwords must match.</li>
                   </ul>
                 </div>
