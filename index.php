@@ -40,6 +40,7 @@ try {
                   <label for="username" class="col-sm-3 col-form-label">Username</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="username" name="username" maxlength="<?= USERNAME_MAX_LENGTH ?>" minlength="<?= USERNAME_MIN_LENGTH ?>" required>
+                    <div id="usernameHelper" class="form-text"></div>
                   </div>
                 </div>
                 <?php if (EMAIL_ENABLED): ?>
@@ -47,6 +48,7 @@ try {
                   <label for="email" class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
                     <input type="email" class="form-control" id="email" name="email" maxlength="255" required>
+                    <div id="emailHelper" class="form-text"></div>
                   </div>
                 </div>
                 <?php endif; ?>
@@ -55,6 +57,7 @@ try {
                   <label for="password" class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
                     <input type="password" class="form-control" id="password" name="password" maxlength="<?= PASSWORD_MAX_LENGTH ?>" minlength="<?= PASSWORD_MIN_LENGTH ?>" required>
+                    <div id="passwordCharsHelper" class="form-text"></div>
                   </div>
                 </div>
 
@@ -62,6 +65,7 @@ try {
                   <label for="passwordRepeat" class="col-sm-3 col-form-label">Confirm Password</label>
                   <div class="col-sm-9">
                     <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" required>
+                    <div id="passwordMatchHelper" class="form-text"></div>
                   </div>
                 </div>
 
