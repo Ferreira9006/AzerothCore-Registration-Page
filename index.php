@@ -1,4 +1,19 @@
-<?php require 'config.php'; ?>
+<?php
+require 'config.php';
+try {
+  // Checks if the DB info is correct / accessible.
+  $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+  // Redirect to db_error.php with error details and blank the page
+  $query = http_build_query([
+    'error_message' => $e->getMessage(),
+    'error_code' => $e->getCode()
+  ]);
+  header('Location: app/errors/db_error.php?' . $query);
+  exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +30,10 @@
         <div class="col-12">
           <div class="card shadow border-white px-5 py-4 custom-card">
             <div class="card-body">
-              <h1><?= $slogan ?></h1>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h1 class="mb-0"><?= $slogan ?></h1>
+                <button id="themeToggle" type="button" class="btn btn-outline-secondary btn-sm">Toggle Theme</button>
+              </div>
               <p><?= $description ?></p>
               <hr class="mb-5">
 
@@ -24,22 +42,25 @@
                 <div class="form-group row mb-3">
                   <label for="username" class="col-sm-3 col-form-label">Username</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="username" name="username" maxlength="15" required>
-                    <small id="usernameHelper"></small>
+                    <input type="text" class="form-control" id="username" name="username" maxlength="<?= USERNAME_MAX_LENGTH ?>" minlength="<?= USERNAME_MIN_LENGTH ?>" required>
+                    <div id="usernameHelper" class="form-text"></div>
                   </div>
                 </div>
+                <?php if (EMAIL_ENABLED): ?>
                 <div class="form-group row mb-3">
                   <label for="email" class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                    <input type="email" class="form-control" id="email" name="email" required>
-                    <small id="emailHelper"></small>
+                    <input type="email" class="form-control" id="email" name="email" maxlength="255" required>
+                    <div id="emailHelper" class="form-text"></div>
                   </div>
                 </div>
+                <?php endif; ?>
 
                 <div class="form-group row mb-3">
                   <label for="password" class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password" maxlength="<?= PASSWORD_MAX_LENGTH ?>" minlength="<?= PASSWORD_MIN_LENGTH ?>" required>
+                    <div id="passwordCharsHelper" class="form-text"></div>
                   </div>
                 </div>
 
@@ -47,12 +68,20 @@
                   <label for="passwordRepeat" class="col-sm-3 col-form-label">Confirm Password</label>
                   <div class="col-sm-9">
                     <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" required>
+                    <div id="passwordMatchHelper" class="form-text"></div>
                   </div>
                 </div>
 
-                <p class="mb-0"><small id="passwordCharsHelper" class="form-text">Minimum 8 characters, maximum 15 characters. No special characters allowed.</small></p>
-                <p class="mb-0"><small id="mustContainHelper" class="form-text">At least one uppercase letter.</small></p>
-                <p><small id="passwordMatchHelper" class="form-text">Your passwords must match.</small></p>
+                <div class="alert alert-info mt-3" role="alert">
+                  <ul class="mb-0">
+                    <li>Username: <?= USERNAME_MIN_LENGTH ?>-<?= USERNAME_MAX_LENGTH ?> characters.</li>
+                    <?php if (EMAIL_ENABLED): ?>
+                    <li>Email: up to 255 characters, must be valid format.</li>
+                    <?php endif; ?>
+                    <li>Password: <?= PASSWORD_MIN_LENGTH ?>-<?= PASSWORD_MAX_LENGTH ?> characters.</li>
+                    <li>Passwords must match.</li>
+                  </ul>
+                </div>
 
                 <button type="submit" id="submit" class="btn btn-primary float-end" disabled>Register</button>
               </form>
@@ -68,6 +97,37 @@
         </div>
       </div>
     </div>
+    <script>
+      const USERNAME_MIN_LENGTH = <?= USERNAME_MIN_LENGTH ?>;
+      const USERNAME_MAX_LENGTH = <?= USERNAME_MAX_LENGTH ?>;
+      const PASSWORD_MIN_LENGTH = <?= PASSWORD_MIN_LENGTH ?>;
+      const PASSWORD_MAX_LENGTH = <?= PASSWORD_MAX_LENGTH ?>;
+      const EMAIL_ENABLED = <?= EMAIL_ENABLED ? 'true' : 'false' ?>;
+    </script>
     <script src="assets/js/script.js"></script>
+    <script>
+      // Theme logic
+      const DEFAULT_THEME = "<?= strtolower(DEFAULT_THEME) ?>";
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark-mode');
+          document.body.classList.remove('light-mode');
+        } else {
+          document.body.classList.add('light-mode');
+          document.body.classList.remove('dark-mode');
+        }
+        localStorage.setItem('theme', theme);
+      }
+      function getTheme() {
+        return localStorage.getItem('theme') || DEFAULT_THEME;
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        setTheme(getTheme());
+        document.getElementById('themeToggle').addEventListener('click', function() {
+          const current = getTheme();
+          setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+      });
+    </script>
   </body>
 </html>

@@ -2,9 +2,28 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtain and filter the inputs
     $username = filter_var($_POST['username']);
-    $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
     $password = filter_var($_POST['password']);
     $passwordRepeat = filter_var($_POST['passwordRepeat']);
+
+    if (defined('EMAIL_ENABLED') && EMAIL_ENABLED) {
+        $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        if (strlen($email) > 255) {
+            echo "<div class='alert alert-danger' role='alert'>Email must be at most 255 characters.</div>";
+            return;
+        }
+    } else {
+        $email = "";
+    }
+
+    // Validate min/max lengths
+    if (strlen($username) < USERNAME_MIN_LENGTH || strlen($username) > USERNAME_MAX_LENGTH) {
+      echo "<div class='alert alert-danger' role='alert'>Username must be between ".USERNAME_MIN_LENGTH." and ".USERNAME_MAX_LENGTH." characters.</div>";
+      return;
+    }
+    if (strlen($password) < PASSWORD_MIN_LENGTH || strlen($password) > PASSWORD_MAX_LENGTH) {
+      echo "<div class='alert alert-danger' role='alert'>Password must be between ".PASSWORD_MIN_LENGTH." and ".PASSWORD_MAX_LENGTH." characters.</div>";
+      return;
+    }
 
     // Get the salt and verifier
     list($salt, $verifier) = SRP6::getRegistrationData(strtoupper($username), $password);
@@ -18,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       return;
     }
 
-    if (Auth::checkEmail($email)) {
+    if (EMAIL_ENABLED && Auth::checkEmail($email)) {
       echo "<div class='alert alert-danger' role='alert'> The entered email is already in use. </div>";
       return;
     }

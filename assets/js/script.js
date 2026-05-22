@@ -1,8 +1,10 @@
 // Requirements
 let validEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Email regex
-let validPassword = /^[a-zA-Z0-9]{8,15}$/; // Password regex
-let validUsername = /^[a-zA-Z0-9]{8,15}$/; // Username regex
-let mustContain = /[A-Z]/; // Must contain uppercase letter
+const PASSWORD_VALID_CHARS = /[a-zA-Z0-9!#$%&'()*+,\-./:;<=>?@[\]^_`{{}}~]/;
+const PASSWORD_VALID_REGEX = new RegExp(`^[a-zA-Z0-9!#$%&'()*+,\-./:;<=>?@[\\]^_\`{{}}~]{${PASSWORD_MIN_LENGTH},${PASSWORD_MAX_LENGTH}}$`);
+let validPassword = PASSWORD_VALID_REGEX; // Password regex
+let validUsername = new RegExp(`^[a-zA-Z0-9]{${USERNAME_MIN_LENGTH},${USERNAME_MAX_LENGTH}}$`); // Username regex
+// Uppercase letter requirement removed
 
 // Get the helper elements
 let usernameHelper = document.getElementById("usernameHelper"); // Username helper
@@ -13,7 +15,7 @@ let passwordMatchHelper = document.getElementById("passwordMatchHelper"); // Con
 
 // Get the input elements
 let inputUsername = document.getElementById('username');
-let inputEmail = document.getElementById('email');
+let inputEmail = EMAIL_ENABLED ? document.getElementById('email') : null;
 let inputPassword = document.getElementById('password');
 let inputConfirmPassword = document.getElementById('passwordRepeat');
 let submitButton = document.getElementById('submit'); // Submit button
@@ -27,21 +29,20 @@ let confirmPasswordTouched = false;
 // Function to validate the form
 function validateForm() {
   let username = inputUsername.value;
-  let email = inputEmail.value;
+  let email = inputEmail ? inputEmail.value : "";
   let password = inputPassword.value;
   let confirmPassword = inputConfirmPassword.value;
 
   let isUsernameValid = validUsername.test(username);
-  let isEmailValid = validEmail.test(email);
+  let isEmailValid = EMAIL_ENABLED ? validEmail.test(email) : true;
   let isPasswordLengthValid = validPassword.test(password);
-  let isPasswordUppercaseValid = mustContain.test(password);
   let isPasswordMatchValid = password === confirmPassword;
 
   // Validate username
   if (usernameTouched) {
     if (!isUsernameValid) {
       usernameHelper.classList.add("text-danger");
-      usernameHelper.innerHTML = "Username must be between 8 and 15 characters. Only letters and numbers are allowed!";
+      usernameHelper.innerHTML = `Username must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters. Only letters and numbers are allowed!`;
     } else {
       usernameHelper.classList.remove("text-danger");
       usernameHelper.innerHTML = "";
@@ -49,10 +50,13 @@ function validateForm() {
   }
 
   // Validate email
-  if (emailTouched) {
+  if (EMAIL_ENABLED && emailTouched) {
     if (!isEmailValid) {
       emailHelper.classList.add("text-danger");
       emailHelper.innerHTML = "Please enter a valid email address!";
+    } else if (inputEmail.value.length > 255) {
+      emailHelper.classList.add("text-danger");
+      emailHelper.innerHTML = "Email must be at most 255 characters.";
     } else {
       emailHelper.classList.remove("text-danger");
       emailHelper.innerHTML = "";
@@ -64,19 +68,13 @@ function validateForm() {
     if (!isPasswordLengthValid) {
       passwordCharsHelper.classList.add("text-danger");
       passwordCharsHelper.classList.remove("text-success");
+      passwordCharsHelper.innerHTML = `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters. Allowed: a-z, A-Z, 0-9, and ! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ ] ^ _ \` {{ }} ~`;
     } else {
       passwordCharsHelper.classList.remove("text-danger");
       passwordCharsHelper.classList.add("text-success");
+      passwordCharsHelper.innerHTML = `Password: Minimum ${PASSWORD_MIN_LENGTH} character(s), maximum ${PASSWORD_MAX_LENGTH} characters. Allowed: a-z, A-Z, 0-9, and ! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ ] ^ _ \` {{ }} ~`;
     }
 
-    // Must contain uppercase letter validation
-    if (isPasswordUppercaseValid) {
-      mustContainHelper.classList.remove("text-danger");
-      mustContainHelper.classList.add("text-success");
-    } else {
-      mustContainHelper.classList.add("text-danger");
-      mustContainHelper.classList.remove("text-success");
-    }
   }
 
   // Confirm password match validation
@@ -91,7 +89,7 @@ function validateForm() {
   }
 
   // Enable or disable the submit button
-  submitButton.disabled = !(isUsernameValid && isEmailValid && isPasswordLengthValid && isPasswordUppercaseValid && isPasswordMatchValid);
+  submitButton.disabled = !(isUsernameValid && isEmailValid && isPasswordLengthValid && isPasswordMatchValid);
 }
 
 // Validate username

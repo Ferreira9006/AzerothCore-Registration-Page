@@ -1,9 +1,23 @@
+
+
 <?php
 // Database Constants
 $host = "127.0.0.1"; // Database Host
-$user = "root"; // Database Username
-$pass = "ascent"; // Database Password
+$user = "acore"; // Database Username
+$pass = "acore"; // Database Password
 $db = "acore_auth"; // Database Name
+
+// Username and Password min/max length constants, default values are client limit.
+define('USERNAME_MIN_LENGTH', 1);
+define('USERNAME_MAX_LENGTH', 17);
+define('PASSWORD_MIN_LENGTH', 1);
+define('PASSWORD_MAX_LENGTH', 16);
+
+// true = enable e-mail usage | false = disable e-mail usage.
+define('EMAIL_ENABLED', true);
+
+// Theme: 'dark' or 'light'
+define('DEFAULT_THEME', 'dark');
 
 // Website Constants
 $title = "AzerothCore | Registration Page"; // Website Title
@@ -11,23 +25,23 @@ $slogan = "Create your Account"; // Website Slogan
 $description = "Fill in all the inputs in the form bellow in order to register."; // Website Description
 
 // Check if required extensions are enabled (see GitHub README.md)
-if (!extension_loaded('gmp')) 
+if (!extension_loaded('gmp'))
 {
   die('Please enable the GMP extension in your PHP configuration.');
 }
 
-if (!extension_loaded('mbstring')) 
+if (!extension_loaded('mbstring'))
 {
   die('Please enable the MBString extension in your PHP configuration.');
 }
 
-if (!extension_loaded('pdo') || !extension_loaded('pdo_mysql')) 
+if (!extension_loaded('pdo') || !extension_loaded('pdo_mysql'))
 {
   die('Please enable the PDO-MySQL extension in your PHP configuration.');
 }
 
 // Check if PHP version is 7.4 or higher
-if (version_compare(PHP_VERSION, '7.4.0', '<')) 
+if (version_compare(PHP_VERSION, '7.4.0', '<'))
 {
   die('Please upgrade to PHP 7.4 or higher.');
 }
